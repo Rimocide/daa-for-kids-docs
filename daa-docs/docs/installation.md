@@ -1,10 +1,4 @@
-Okay, let's expand the installation section to be more detailed and highlight the benefits of local setup for exploration and contribution.
-
-Here is the enhanced installation guide:
-
----
-
-## Installation
+# Installation
 
 To get started with the project, follow these steps to set it up on your local machine. Hosting the project locally provides a powerful environment for experimenting with the code, understanding its structure, and potentially contributing to its development.
 
