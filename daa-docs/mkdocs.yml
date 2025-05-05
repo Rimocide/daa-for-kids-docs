@@ -1,0 +1,9 @@
+site_name: DAA for Kids
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: black      # Keep header black
+      accent: custom      # Custom accent for links/buttons/etc.
+extra_css:
+  - stylesheets/extra.css
