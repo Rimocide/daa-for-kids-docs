@@ -7,3 +7,15 @@ theme:
       accent: custom      # Custom accent for links/buttons/etc.
 extra_css:
   - stylesheets/extra.css
+nav:
+  - Home: index.md
+  - Introduction: introduction.md
+  - Components: components.md
+  - Problems: problems.md
+  - Solution: solution.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Examples: examples.md
+  - Contributing: contributing.md
+  - License: license.md
+  - Changelog: changelog.md
