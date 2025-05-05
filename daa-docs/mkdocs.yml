@@ -7,6 +7,12 @@ theme:
       accent: custom      # Custom accent for links/buttons/etc.
 extra_css:
   - stylesheets/extra.css
+extra:
+  highlight:
+    theme: dracula # Use the Dracula color theme
+    # Move lang_synonyms here to see if it's recognized in the extra section
+    lang_synonyms:
+      pseudocode: python
 nav:
   - Introduction: index.md
   - Installation: installation.md
@@ -19,3 +25,11 @@ nav:
   - Examples: examples.md
   - Contributing: contributing.md
   - Changelog: changelog.md
+markdown_extensions:
+  - attr_list: {}
+  - pymdownx.superfences: {}
+  # Keep pymdownx.highlight enabled, but remove the lang_synonyms config here
+  - pymdownx.highlight:
+      linenums: false
+      css_class: highlight
+  # You might already have other extensions listed here, keep them.
