@@ -18,7 +18,7 @@ The first step is to obtain a copy of the project's source code. This is done by
 Open your terminal or command prompt and execute the following commands:
 
 ```bash
-git clone https://github.com/yourusername/daa-for-kids.git
+git clone https://github.com/muhamad-bilal/daa-for-kids
 cd daa-for-kids
 ```
 

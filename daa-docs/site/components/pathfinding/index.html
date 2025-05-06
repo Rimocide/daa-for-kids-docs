@@ -1,0 +1,1324 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../installation/">
+      
+      
+        <link rel="next" href="../knapsack/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Pathfinding Algorithms - DAA for Kids</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pathfinding-algorithms-visualizer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="DAA for Kids" class="md-header__button md-logo" aria-label="DAA for Kids" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DAA for Kids
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Pathfinding Algorithms
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DAA for Kids" class="md-nav__button md-logo" aria-label="DAA for Kids" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    DAA for Kids
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Components
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Components
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Pathfinding Algorithms
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pathfinding Algorithms
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-pathfinding" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Pathfinding?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the Visualizer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms-explored" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithms Explored
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithms Explored">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unweighted-graph-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unweighted Graph Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weighted-graph-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weighted Graph Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-and-specialized-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced and Specialized Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithm-pseudocode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm Pseudocode
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../knapsack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Knapsack Problem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lcs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Longest Common Subsequence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../huffman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Huffman Encoding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-pathfinding" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Pathfinding?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the Visualizer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms-explored" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithms Explored
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithms Explored">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unweighted-graph-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unweighted Graph Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weighted-graph-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weighted Graph Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-and-specialized-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced and Specialized Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithm-pseudocode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm Pseudocode
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="pathfinding-algorithms-visualizer">Pathfinding Algorithms Visualizer</h1>
+<p>Welcome to the <strong>Pathfinding Algorithms Visualizer</strong> module, a core component of the DAA for Kids project. This interactive tool is designed to illuminate the fascinating world of algorithms that find the shortest or optimal path between two points in a graph or grid. Understanding pathfinding is fundamental to many areas of computer science, from game development and robotics to network routing and logistics.</p>
+<hr />
+<h2 id="what-is-pathfinding">What is Pathfinding?</h2>
+<p>At its heart, pathfinding is about navigating from a starting point to a destination, often avoiding obstacles and sometimes considering the "cost" of traversing different paths. Our visualizer brings these abstract concepts to life on a grid, allowing you to see exactly how various algorithms explore possible routes and determine the most efficient path.</p>
+<hr />
+<h2 id="using-the-visualizer">Using the Visualizer</h2>
+<p>The visualizer provides a dynamic grid environment where you can:</p>
+<ul>
+<li>
+<p><strong>Define the Environment:</strong> Place start and end nodes, draw walls to represent impassable obstacles, and add weights to cells to simulate varying traversal costs.</p>
+</li>
+<li>
+<p><strong>Select an Algorithm:</strong> Choose from a diverse set of pathfinding algorithms.</p>
+</li>
+<li>
+<p><strong>Control Execution:</strong> Start, pause, resume, and adjust the speed of the visualization to observe the algorithm's step-by-step process.</p>
+</li>
+<li>
+<p><strong>Reset and Generate:</strong> Clear the grid or generate random maps to test algorithms under different conditions.</p>
+</li>
+</ul>
+<p>As the algorithm runs, you'll see nodes being visited, the path being constructed (if found), and understand the search pattern unique to each algorithm.</p>
+<hr />
+<h2 id="algorithms-explored">Algorithms Explored</h2>
+<p>This visualizer offers a comprehensive look at a variety of pathfinding algorithms, categorized by their approach and suitability for different types of graphs (weighted vs. unweighted). Each algorithm brings a unique strategy to the problem of finding a path.</p>
+<h3 id="unweighted-graph-algorithms">Unweighted Graph Algorithms</h3>
+<p>These algorithms are typically used on graphs where the cost of moving between any two connected nodes is the same (or assumed to be 1). They focus on finding the path with the fewest steps.</p>
+<ul>
+<li>
+<p><strong>Breadth-First Search (BFS):</strong> Explores the graph level by level, guaranteeing the shortest path in terms of the number of edges.</p>
+</li>
+<li>
+<p><strong>Depth-First Search (DFS):</strong> Explores as far down one branch as possible before backtracking, often used for traversal but not guaranteed to find the shortest path.</p>
+</li>
+</ul>
+<h3 id="weighted-graph-algorithms">Weighted Graph Algorithms</h3>
+<p>When edges or nodes have different associated costs (weights), these algorithms are necessary to find the path with the minimum total cost.</p>
+<ul>
+<li>
+<p><strong>Dijkstra’s Algorithm:</strong> Finds the shortest paths from a single source node to all other nodes in a graph with non-negative edge weights.</p>
+</li>
+<li>
+<p><strong>A* Search Algorithm:</strong> An extension of Dijkstra's that uses a heuristic function to guide its search, making it more efficient in many cases, especially for finding a path to a specific destination.</p>
+</li>
+<li>
+<p><strong>Greedy Best-First Search:</strong> Uses a heuristic to prioritize exploration towards the target, but does not guarantee the shortest path.</p>
+</li>
+<li>
+<p><strong>Bellman-Ford Algorithm:</strong> Can find the shortest paths from a single source node even in graphs with negative edge weights (though it detects negative cycles).</p>
+</li>
+<li>
+<p><strong>Floyd-Warshall Algorithm:</strong> Finds the shortest paths between <em>all</em> pairs of nodes in a weighted graph.</p>
+</li>
+</ul>
+<h3 id="advanced-and-specialized-algorithms">Advanced and Specialized Algorithms</h3>
+<p>This category includes algorithms designed for specific scenarios or offering alternative approaches to pathfinding.</p>
+<ul>
+<li>
+<p><strong>Bidirectional Search:</strong> Runs two searches simultaneously, one from the start and one from the end, meeting in the middle. Can be faster than a single-direction search.</p>
+</li>
+<li>
+<p><strong>Jump Point Search:</strong> An optimization for grid-based pathfinding that "jumps" over large areas, significantly speeding up search on uniform cost grids.</p>
+</li>
+</ul>
+<hr />
+<h2 id="algorithm-pseudocode">Algorithm Pseudocode</h2>
+<p>Explore the fundamental logic behind each pathfinding algorithm. Select an algorithm from the dropdown below to view its pseudocode.</p>
+<div class="algorithm-pseudocode-container">
+    <select id="algorithm-selector" class="algorithm-dropdown">
+        <option value="">Select an Algorithm</option>
+        <option value="bfs">Breadth-First Search (BFS)</option>
+        <option value="dijkstra">Dijkstra’s Algorithm</option>
+        <option value="astar">A* Search Algorithm</option>
+        <option value="greedy-bfs">Greedy Best-First Search</option>
+        <option value="bellman-ford">Bellman-Ford Algorithm</option>
+        <option value="floyd-warshall">Floyd-Warshall Algorithm</option> {/* <-- Check this value */}
+        <option value="bidirectional">Bidirectional Search</option>
+        <option value="jps">Jump Point Search</option>
+        </select>
+
+    <div id="pseudocode-display" class="pseudocode-block">
+        <p>Select an algorithm from the dropdown above to see its pseudocode.</p>
+    </div>
+
+    <div id="bfs-pseudocode" class="pseudocode-content" style="display: none;">
+        <div class="highlight"><pre><span></span><code><span class="n">BFS</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="n">queue</span> <span class="n">Q</span>
+    <span class="n">add</span> <span class="n">start_node</span> <span class="n">to</span> <span class="n">Q</span>
+    <span class="n">mark</span> <span class="n">start_node</span> <span class="k">as</span> <span class="n">visited</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">parent</span> <span class="n">to</span> <span class="n">store</span> <span class="n">parent</span> <span class="n">of</span> <span class="n">each</span> <span class="n">node</span>
+
+    <span class="k">while</span> <span class="n">Q</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span><span class="p">:</span>
+        <span class="n">current_node</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">current_node</span> <span class="ow">is</span> <span class="n">end_node</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">reconstruct_path</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">each</span> <span class="n">neighbor</span> <span class="n">of</span> <span class="n">current_node</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">:</span>
+                <span class="n">mark</span> <span class="n">neighbor</span> <span class="k">as</span> <span class="n">visited</span>
+                <span class="nb">set</span> <span class="n">parent</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_node</span>
+                <span class="n">Q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="s2">&quot;No path found&quot;</span>
+
+<span class="n">reconstruct_path</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">end_node</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">null</span><span class="p">:</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+    <span class="n">reverse</span> <span class="n">path</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div>
+    </div>
+
+    <div id="dijkstra-pseudocode" class="pseudocode-content" style="display: none;">
+        <div class="highlight"><pre><span></span><code><span class="n">Dijkstra</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="n">priority</span> <span class="n">queue</span> <span class="n">PQ</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">distance</span><span class="p">,</span> <span class="n">initialize</span> <span class="nb">all</span> <span class="n">to</span> <span class="n">infinity</span><span class="p">,</span> <span class="n">distance</span><span class="p">[</span><span class="n">start_node</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">parent</span> <span class="n">to</span> <span class="n">store</span> <span class="n">parent</span> <span class="n">of</span> <span class="n">each</span> <span class="n">node</span>
+
+    <span class="n">PQ</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># node, priority</span>
+
+    <span class="k">while</span> <span class="n">PQ</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span><span class="p">:</span>
+        <span class="n">current_node</span> <span class="o">=</span> <span class="n">PQ</span><span class="o">.</span><span class="n">extract_min</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">current_node</span> <span class="ow">is</span> <span class="n">end_node</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">reconstruct_path</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">each</span> <span class="n">neighbor</span> <span class="n">of</span> <span class="n">current_node</span><span class="p">:</span>
+            <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">weight</span><span class="p">(</span><span class="n">current_node</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
+            <span class="n">new_distance</span> <span class="o">=</span> <span class="n">distance</span><span class="p">[</span><span class="n">current_node</span><span class="p">]</span> <span class="o">+</span> <span class="n">edge_weight</span>
+
+            <span class="k">if</span> <span class="n">new_distance</span> <span class="o">&lt;</span> <span class="n">distance</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]:</span>
+                <span class="n">distance</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_distance</span>
+                <span class="n">parent</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_node</span>
+                <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">PQ</span><span class="p">:</span>
+                    <span class="n">PQ</span><span class="o">.</span><span class="n">decrease_priority</span><span class="p">(</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">new_distance</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">PQ</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">new_distance</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="s2">&quot;No path found&quot;</span>
+
+<span class="n">reconstruct_path</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">end_node</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">null</span><span class="p">:</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+    <span class="n">reverse</span> <span class="n">path</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div>
+    </div>
+
+    <div id="astar-pseudocode" class="pseudocode-content" style="display: none;">
+        <div class="highlight"><pre><span></span><code><span class="n">A_star</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="n">priority</span> <span class="n">queue</span> <span class="n">open_set</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">came_from</span> <span class="n">to</span> <span class="n">store</span> <span class="n">parent</span> <span class="n">of</span> <span class="n">each</span> <span class="n">node</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">g_score</span><span class="p">,</span> <span class="n">initialize</span> <span class="nb">all</span> <span class="n">to</span> <span class="n">infinity</span><span class="p">,</span> <span class="n">g_score</span><span class="p">[</span><span class="n">start_node</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">f_score</span><span class="p">,</span> <span class="n">initialize</span> <span class="nb">all</span> <span class="n">to</span> <span class="n">infinity</span><span class="p">,</span> <span class="n">f_score</span><span class="p">[</span><span class="n">start_node</span><span class="p">]</span> <span class="o">=</span> <span class="n">heuristic</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
+
+    <span class="n">open_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">f_score</span><span class="p">[</span><span class="n">start_node</span><span class="p">])</span> <span class="c1"># node, priority</span>
+
+    <span class="k">while</span> <span class="n">open_set</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span><span class="p">:</span>
+        <span class="n">current_node</span> <span class="o">=</span> <span class="n">open_set</span><span class="o">.</span><span class="n">extract_min</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">current_node</span> <span class="ow">is</span> <span class="n">end_node</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">reconstruct_path</span><span class="p">(</span><span class="n">came_from</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">each</span> <span class="n">neighbor</span> <span class="n">of</span> <span class="n">current_node</span><span class="p">:</span>
+            <span class="n">tentative_g_score</span> <span class="o">=</span> <span class="n">g_score</span><span class="p">[</span><span class="n">current_node</span><span class="p">]</span> <span class="o">+</span> <span class="n">distance</span><span class="p">(</span><span class="n">current_node</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">tentative_g_score</span> <span class="o">&lt;</span> <span class="n">g_score</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]:</span>
+                <span class="n">came_from</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_node</span>
+                <span class="n">g_score</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">tentative_g_score</span>
+                <span class="n">f_score</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_score</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">+</span> <span class="n">heuristic</span><span class="p">(</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">open_set</span><span class="p">:</span>
+                    <span class="n">open_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">f_score</span><span class="p">[</span><span class="n">neighbor</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="s2">&quot;No path found&quot;</span>
+
+<span class="n">heuristic</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">):</span>
+    <span class="o">//</span> <span class="n">Implement</span> <span class="n">a</span> <span class="n">suitable</span> <span class="n">heuristic</span> <span class="n">function</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="n">Manhattan</span> <span class="n">distance</span><span class="p">,</span> <span class="n">Euclidean</span> <span class="n">distance</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">estimated_distance_between</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span>
+
+<span class="n">reconstruct_path</span><span class="p">(</span><span class="n">came_from</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">end_node</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">null</span><span class="p">:</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">came_from</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+    <span class="n">reverse</span> <span class="n">path</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div>
+    </div>
+
+    <div id="greedy-bfs-pseudocode" class="pseudocode-content" style="display: none;">
+        <div class="highlight"><pre><span></span><code><span class="n">Greedy_Best_First_Search</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="n">priority</span> <span class="n">queue</span> <span class="n">PQ</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">came_from</span> <span class="n">to</span> <span class="n">store</span> <span class="n">parent</span> <span class="n">of</span> <span class="n">each</span> <span class="n">node</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="nb">set</span> <span class="n">visited</span>
+
+    <span class="n">PQ</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">heuristic</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">))</span> <span class="c1"># node, priority based on heuristic</span>
+
+    <span class="k">while</span> <span class="n">PQ</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span><span class="p">:</span>
+        <span class="n">current_node</span> <span class="o">=</span> <span class="n">PQ</span><span class="o">.</span><span class="n">extract_min</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">current_node</span> <span class="ow">is</span> <span class="n">end_node</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">reconstruct_path</span><span class="p">(</span><span class="n">came_from</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">current_node</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">mark</span> <span class="n">current_node</span> <span class="k">as</span> <span class="n">visited</span>
+
+        <span class="k">for</span> <span class="n">each</span> <span class="n">neighbor</span> <span class="n">of</span> <span class="n">current_node</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                <span class="n">came_from</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_node</span>
+                <span class="n">PQ</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">heuristic</span><span class="p">(</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">end_node</span><span class="p">))</span>
+
+
+    <span class="k">return</span> <span class="s2">&quot;No path found&quot;</span>
+
+<span class="n">heuristic</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">):</span>
+    <span class="o">//</span> <span class="n">Implement</span> <span class="n">a</span> <span class="n">suitable</span> <span class="n">heuristic</span> <span class="n">function</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="n">Manhattan</span> <span class="n">distance</span><span class="p">,</span> <span class="n">Euclidean</span> <span class="n">distance</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">estimated_distance_between</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span>
+
+<span class="n">reconstruct_path</span><span class="p">(</span><span class="n">came_from</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">end_node</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">null</span><span class="p">:</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">came_from</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+    <span class="n">reverse</span> <span class="n">path</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div>
+    </div>
+
+    <div id="bellman-ford-pseudocode" class="pseudocode-content" style="display: none;">
+        <div class="highlight"><pre><span></span><code><span class="n">Bellman_Ford</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_node</span><span class="p">):</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">distance</span><span class="p">,</span> <span class="n">initialize</span> <span class="nb">all</span> <span class="n">to</span> <span class="n">infinity</span><span class="p">,</span> <span class="n">distance</span><span class="p">[</span><span class="n">start_node</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">parent</span> <span class="n">to</span> <span class="n">store</span> <span class="n">parent</span> <span class="n">of</span> <span class="n">each</span> <span class="n">node</span>
+
+    <span class="n">num_vertices</span> <span class="o">=</span> <span class="n">number</span> <span class="n">of</span> <span class="n">vertices</span> <span class="ow">in</span> <span class="n">graph</span>
+
+    <span class="o">//</span> <span class="n">Relax</span> <span class="n">edges</span> <span class="o">|</span><span class="n">V</span><span class="o">|</span> <span class="o">-</span> <span class="mi">1</span> <span class="n">times</span>
+    <span class="n">repeat</span> <span class="n">num_vertices</span> <span class="o">-</span> <span class="mi">1</span> <span class="n">times</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">each</span> <span class="n">edge</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">with</span> <span class="n">weight</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">distance</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">distance</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="n">distance</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span>
+                <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+
+    <span class="o">//</span> <span class="n">Check</span> <span class="k">for</span> <span class="n">negative</span> <span class="n">cycles</span>
+    <span class="k">for</span> <span class="n">each</span> <span class="n">edge</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">with</span> <span class="n">weight</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">distance</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">distance</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="s2">&quot;Graph contains a negative cycle&quot;</span> <span class="o">//</span> <span class="n">Cannot</span> <span class="n">find</span> <span class="n">shortest</span> <span class="n">paths</span>
+
+    <span class="k">return</span> <span class="n">distance</span><span class="p">,</span> <span class="n">parent</span> <span class="o">//</span> <span class="n">Returns</span> <span class="n">shortest</span> <span class="n">distances</span> <span class="kn">from</span> <span class="nn">start_node</span> <span class="ow">and</span> <span class="n">parent</span> <span class="n">pointers</span>
+
+<span class="o">//</span> <span class="n">Note</span><span class="p">:</span> <span class="n">To</span> <span class="n">find</span> <span class="n">the</span> <span class="n">path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">end_node</span><span class="p">,</span> <span class="n">you</span> <span class="n">would</span> <span class="n">reconstruct</span> <span class="n">it</span>
+<span class="o">//</span> <span class="n">using</span> <span class="n">the</span> <span class="n">parent</span> <span class="nb">map</span> <span class="n">after</span> <span class="n">the</span> <span class="n">algorithm</span> <span class="n">completes</span> <span class="ow">and</span> <span class="n">confirms</span> <span class="n">no</span> <span class="n">negative</span> <span class="n">cycles</span><span class="o">.</span>
+<span class="n">reconstruct_path</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">end_node</span>
+    <span class="o">//</span> <span class="n">Add</span> <span class="n">a</span> <span class="n">check</span> <span class="n">to</span> <span class="n">prevent</span> <span class="n">infinite</span> <span class="n">loops</span> <span class="ow">in</span> <span class="n">case</span> <span class="n">of</span> <span class="n">issues</span> <span class="ow">or</span> <span class="n">unreachable</span> <span class="n">nodes</span>
+    <span class="n">visited_check</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">null</span> <span class="ow">and</span> <span class="n">current</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited_check</span><span class="p">:</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">visited_check</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+    <span class="o">//</span> <span class="n">Check</span> <span class="k">if</span> <span class="n">start_node</span> <span class="n">was</span> <span class="n">reached</span> <span class="p">(</span><span class="n">current</span> <span class="ow">is</span> <span class="n">null</span> <span class="k">if</span> <span class="ow">not</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="n">null</span> <span class="ow">and</span> <span class="n">start_node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+         <span class="k">return</span> <span class="s2">&quot;Path could not be reconstructed&quot;</span> <span class="c1"># Or handle as an error</span>
+    <span class="n">reverse</span> <span class="n">path</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div>
+    </div>
+
+    <div id="floyd-warshall-pseudocode" class="pseudocode-content" style="display: none;"> {/* <-- Check this ID */}
+        ```python
+        Floyd_Warshall(graph):
+            num_vertices = number of vertices in graph
+            create a matrix dist of size num_vertices x num_vertices
+            create a matrix next_node of size num_vertices x num_vertices // To reconstruct paths
+
+            // Initialize dist matrix
+            for i from 0 to num_vertices - 1:
+                for j from 0 to num_vertices - 1:
+                    if i == j:
+                        dist[i][j] = 0
+                    elif edge exists from i to j:
+                        dist[i][j] = weight(i, j)
+                        next_node[i][j] = j
+                    else:
+                        dist[i][j] = infinity
+                        next_node[i][j] = null
+
+            // Apply the algorithm
+            for k from 0 to num_vertices - 1: // Intermediate vertices
+                for i from 0 to num_vertices - 1: // Start vertices
+                    for j from 0 to num_vertices - 1: // End vertices
+                        if dist[i][k] is not infinity and dist[k][j] is not infinity:
+                            if dist[i][k] + dist[k][j] < dist[i][j]:
+                                dist[i][j] = dist[i][k] + dist[k][j]
+                                next_node[i][j] = next_node[i][k]
+
+        // dist matrix now contains shortest paths between all pairs
+        // next_node matrix can be used to reconstruct paths
+
+        return dist, next_node
+
+    reconstruct_path_floyd_warshall(start_node, end_node, next_node):
+         if next_node[start_node][end_node] is null:
+             return "No path exists" // Or handle as error
+
+         path = [start_node]
+         current = start_node
+         while current is not end_node:
+             current = next_node[current][end_node]
+             path.add(current)
+
+         return path
+        ```
+    </div>
+
+    <div id="bidirectional-pseudocode" class="pseudocode-content" style="display: none;">
+        <div class="highlight"><pre><span></span><code><span class="n">Bidirectional_Search</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">create</span> <span class="n">queue_forward</span> <span class="ow">and</span> <span class="n">queue_backward</span>
+    <span class="n">create</span> <span class="n">visited_forward</span> <span class="ow">and</span> <span class="n">visited_backward</span> <span class="n">sets</span>
+    <span class="n">create</span> <span class="n">parent_forward</span> <span class="ow">and</span> <span class="n">parent_backward</span> <span class="n">maps</span>
+
+    <span class="n">queue_forward</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">start_node</span><span class="p">)</span>
+    <span class="n">visited_forward</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">start_node</span><span class="p">)</span>
+    <span class="n">parent_forward</span><span class="p">[</span><span class="n">start_node</span><span class="p">]</span> <span class="o">=</span> <span class="n">null</span>
+
+    <span class="n">queue_backward</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">end_node</span><span class="p">)</span>
+    <span class="n">visited_backward</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">end_node</span><span class="p">)</span>
+    <span class="n">parent_backward</span><span class="p">[</span><span class="n">end_node</span><span class="p">]</span> <span class="o">=</span> <span class="n">null</span>
+
+    <span class="k">while</span> <span class="n">queue_forward</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span> <span class="ow">and</span> <span class="n">queue_backward</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span><span class="p">:</span>
+        <span class="o">//</span> <span class="n">Search</span> <span class="kn">from</span> <span class="nn">start</span>
+        <span class="n">current_f</span> <span class="o">=</span> <span class="n">queue_forward</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current_f</span> <span class="ow">in</span> <span class="n">visited_backward</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">reconstruct_bidirectional_path</span><span class="p">(</span><span class="n">parent_forward</span><span class="p">,</span> <span class="n">parent_backward</span><span class="p">,</span> <span class="n">current_f</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">each</span> <span class="n">neighbor</span> <span class="n">of</span> <span class="n">current_f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited_forward</span><span class="p">:</span>
+                <span class="n">visited_forward</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+                <span class="n">parent_forward</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_f</span>
+                <span class="n">queue_forward</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+
+        <span class="o">//</span> <span class="n">Search</span> <span class="kn">from</span> <span class="nn">end</span>
+        <span class="n">current_b</span> <span class="o">=</span> <span class="n">queue_backward</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current_b</span> <span class="ow">in</span> <span class="n">visited_forward</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">reconstruct_bidirectional_path</span><span class="p">(</span><span class="n">parent_forward</span><span class="p">,</span> <span class="n">parent_backward</span><span class="p">,</span> <span class="n">current_b</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">each</span> <span class="n">neighbor</span> <span class="n">of</span> <span class="n">current_b</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited_backward</span><span class="p">:</span>
+                <span class="n">visited_backward</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+                <span class="n">parent_backward</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_b</span>
+                <span class="n">queue_backward</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="s2">&quot;No path found&quot;</span> <span class="o">//</span> <span class="n">Queues</span> <span class="n">are</span> <span class="n">empty</span> <span class="ow">and</span> <span class="n">no</span> <span class="n">intersection</span> <span class="n">found</span>
+
+<span class="n">reconstruct_bidirectional_path</span><span class="p">(</span><span class="n">parent_forward</span><span class="p">,</span> <span class="n">parent_backward</span><span class="p">,</span> <span class="n">meeting_node</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="o">//</span> <span class="n">Path</span> <span class="kn">from</span> <span class="nn">start</span> <span class="n">to</span> <span class="n">meeting_node</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">meeting_node</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">null</span><span class="p">:</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">parent_forward</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+    <span class="n">reverse</span> <span class="n">path</span>
+
+    <span class="o">//</span> <span class="n">Path</span> <span class="kn">from</span> <span class="nn">meeting_node</span> <span class="n">to</span> <span class="n">end_node</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">parent_backward</span><span class="p">[</span><span class="n">meeting_node</span><span class="p">]</span> <span class="o">//</span> <span class="n">Start</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">node</span> <span class="o">*</span><span class="n">before</span><span class="o">*</span> <span class="n">the</span> <span class="n">meeting</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">backward</span> <span class="n">search</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">null</span><span class="p">:</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">parent_backward</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div>
+    </div>
+
+    <div id="jps-pseudocode" class="pseudocode-content" style="display: none;">
+        <div class="highlight"><pre><span></span><code><span class="o">//</span> <span class="n">Note</span><span class="p">:</span> <span class="n">Jump</span> <span class="n">Point</span> <span class="n">Search</span> <span class="ow">is</span> <span class="nb">complex</span> <span class="ow">and</span> <span class="n">typically</span> <span class="n">implemented</span> <span class="n">on</span> <span class="n">a</span> <span class="n">grid</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">This</span> <span class="n">pseudocode</span> <span class="n">provides</span> <span class="n">a</span> <span class="n">high</span><span class="o">-</span><span class="n">level</span> <span class="n">overview</span> <span class="n">of</span> <span class="n">the</span> <span class="n">core</span> <span class="n">idea</span><span class="o">.</span>
+
+<span class="n">JPS</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">create</span> <span class="n">open_set</span> <span class="p">(</span><span class="n">priority</span> <span class="n">queue</span><span class="p">)</span>
+    <span class="n">create</span> <span class="n">came_from</span> <span class="nb">map</span>
+    <span class="n">create</span> <span class="n">g_score</span> <span class="nb">map</span><span class="p">,</span> <span class="n">initialize</span> <span class="nb">all</span> <span class="n">to</span> <span class="n">infinity</span><span class="p">,</span> <span class="n">g_score</span><span class="p">[</span><span class="n">start_node</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">create</span> <span class="n">f_score</span> <span class="nb">map</span><span class="p">,</span> <span class="n">initialize</span> <span class="nb">all</span> <span class="n">to</span> <span class="n">infinity</span><span class="p">,</span> <span class="n">f_score</span><span class="p">[</span><span class="n">start_node</span><span class="p">]</span> <span class="o">=</span> <span class="n">heuristic</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
+
+    <span class="n">open_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">f_score</span><span class="p">[</span><span class="n">start_node</span><span class="p">])</span>
+
+    <span class="k">while</span> <span class="n">open_set</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span><span class="p">:</span>
+        <span class="n">current_node</span> <span class="o">=</span> <span class="n">open_set</span><span class="o">.</span><span class="n">extract_min</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">current_node</span> <span class="ow">is</span> <span class="n">end_node</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">reconstruct_path</span><span class="p">(</span><span class="n">came_from</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
+
+        <span class="o">//</span> <span class="n">Find</span> <span class="s2">&quot;jump points&quot;</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">current</span> <span class="n">node</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="n">find_jump_points</span><span class="p">(</span><span class="n">current_node</span><span class="p">,</span> <span class="n">came_from</span><span class="p">[</span><span class="n">current_node</span><span class="p">],</span> <span class="n">grid</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">each</span> <span class="n">neighbor</span> <span class="p">(</span><span class="n">jump_point</span><span class="p">):</span>
+            <span class="n">tentative_g_score</span> <span class="o">=</span> <span class="n">g_score</span><span class="p">[</span><span class="n">current_node</span><span class="p">]</span> <span class="o">+</span> <span class="n">distance</span><span class="p">(</span><span class="n">current_node</span><span class="p">,</span> <span class="n">jump_point</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">tentative_g_score</span> <span class="o">&lt;</span> <span class="n">g_score</span><span class="p">[</span><span class="n">jump_point</span><span class="p">]:</span>
+                <span class="n">came_from</span><span class="p">[</span><span class="n">jump_point</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_node</span>
+                <span class="n">g_score</span><span class="p">[</span><span class="n">jump_point</span><span class="p">]</span> <span class="o">=</span> <span class="n">tentative_g_score</span>
+                <span class="n">f_score</span><span class="p">[</span><span class="n">jump_point</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_score</span><span class="p">[</span><span class="n">jump_point</span><span class="p">]</span> <span class="o">+</span> <span class="n">heuristic</span><span class="p">(</span><span class="n">jump_point</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">jump_point</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">open_set</span><span class="p">:</span>
+                    <span class="n">open_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">jump_point</span><span class="p">,</span> <span class="n">f_score</span><span class="p">[</span><span class="n">jump_point</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="s2">&quot;No path found&quot;</span>
+
+<span class="n">find_jump_points</span><span class="p">(</span><span class="n">current_node</span><span class="p">,</span> <span class="n">parent_node</span><span class="p">,</span> <span class="n">grid</span><span class="p">):</span>
+    <span class="o">//</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">core</span> <span class="nb">complex</span> <span class="n">part</span> <span class="n">of</span> <span class="n">JPS</span><span class="o">.</span>
+    <span class="o">//</span> <span class="n">It</span> <span class="n">involves</span> <span class="n">pruning</span> <span class="n">redundant</span> <span class="n">neighbors</span> <span class="ow">and</span> <span class="n">recursively</span> <span class="n">searching</span> <span class="k">for</span> <span class="n">forced</span> <span class="n">neighbors</span>
+    <span class="o">//</span> <span class="ow">and</span> <span class="n">jump</span> <span class="n">points</span> <span class="ow">in</span> <span class="n">cardinal</span> <span class="ow">and</span> <span class="n">diagonal</span> <span class="n">directions</span><span class="o">.</span>
+    <span class="o">//</span> <span class="n">Returns</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">significant</span> <span class="s2">&quot;jump points&quot;</span> <span class="n">reachable</span> <span class="kn">from</span> <span class="nn">current_node.</span>
+    <span class="k">pass</span> <span class="o">//</span> <span class="n">Placeholder</span> <span class="k">for</span> <span class="nb">complex</span> <span class="n">logic</span>
+
+<span class="n">heuristic</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">):</span>
+    <span class="o">//</span> <span class="n">Implement</span> <span class="n">a</span> <span class="n">suitable</span> <span class="n">heuristic</span> <span class="n">function</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="n">Manhattan</span> <span class="n">distance</span><span class="p">,</span> <span class="n">Euclidean</span> <span class="n">distance</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">estimated_distance_between</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span>
+
+<span class="n">reconstruct_path</span><span class="p">(</span><span class="n">came_from</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">end_node</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">null</span><span class="p">:</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">came_from</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+    <span class="n">reverse</span> <span class="n">path</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div>
+    </div>
+
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selector = document.getElementById('algorithm-selector');
+    const pseudocodeDisplay = document.getElementById('pseudocode-display');
+    const pseudocodeContentBlocks = document.querySelectorAll('.pseudocode-content');
+
+    console.log("Script loaded. Pseudocode content blocks found:", pseudocodeContentBlocks.length);
+
+    selector.addEventListener('change', function() {
+        const selectedAlgorithm = selector.value;
+        console.log('Selected algorithm:', selectedAlgorithm);
+
+        // Hide all pseudocode blocks
+        pseudocodeContentBlocks.forEach(block => {
+            block.style.display = 'none';
+        });
+
+        // Clear the main display area
+        pseudocodeDisplay.innerHTML = '';
+
+        if (selectedAlgorithm) {
+            const targetBlockId = selectedAlgorithm + '-pseudocode';
+            console.log('Attempting to find target block with ID:', targetBlockId); // More specific log
+            const targetBlock = document.getElementById(targetBlockId);
+
+            if (targetBlock) {
+                console.log('Target block FOUND:', targetBlock); // Log if found
+                // Find the pre element directly in the hidden target block
+                const preElement = targetBlock.querySelector('pre');
+                console.log('Found pre element:', preElement);
+
+                if (preElement) {
+                     // Clone the pre element and append it to the display area
+                    const clonedPreElement = preElement.cloneNode(true);
+                    pseudocodeDisplay.appendChild(clonedPreElement);
+                    console.log('Pseudocode appended and should be visible.');
+
+                    // Re-highlight the code block if necessary.
+                    // MkDocs Material often handles this automatically for elements
+                    // added to the DOM, but if not, you might need to trigger it.
+                    // The exact method depends on the highlighting library used by MkDocs Material.
+                    // A common approach if using highlight.js would be:
+                    // if (window.hljs) {
+                    //     window.hljs.highlightBlock(clonedPreElement.querySelector('code'));
+                    // }
+                    // If using Prism.js:
+                    // if (window.Prism) {
+                    //     window.Prism.highlightElement(clonedPreElement.querySelector('code'));
+                    // }
+                    // Test this on your site to see if automatic re-highlighting works.
+                } else {
+                     console.error('Could not find pre element within target block:', targetBlock);
+                     pseudocodeDisplay.innerHTML = '<p>Error loading pseudocode.</p>';
+                }
+
+            } else {
+                console.error('Could not find target block with ID:', targetBlockId); // Log if NOT found
+                pseudocodeDisplay.innerHTML = '<p>Error loading pseudocode.</p>';
+            }
+        } else {
+             pseudocodeDisplay.innerHTML = '<p>Select an algorithm from the dropdown above to see its pseudocode.</p>';
+        }
+    });
+
+    // Optional: You might need to trigger highlighting on initial page load
+    // for all code blocks if they are not highlighted by default when hidden.
+    // This is often handled by MkDocs Material itself.
+});
+</script>
+
+<style>
+/* Improved styling for the dropdown and container */
+.algorithm-pseudocode-container {
+    margin: 20px 0; /* Add some vertical margin */
+    padding: 20px; /* Increased padding */
+    background-color: #282c34; /* A common dark theme background color (like VS Code's default) */
+    border-radius: 8px; /* Slightly more rounded corners */
+    border: 1px solid #3a3f4b; /* Subtle border color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    font-family: 'Roboto', sans-serif; /* Use a clean font, maybe match your theme's font */
+}
+
+.algorithm-dropdown {
+    display: block; /* Make it a block element for better layout */
+    width: 100%; /* Make it fill the container width */
+    padding: 12px 15px; /* Increased padding */
+    border-radius: 5px; /* Rounded corners for the dropdown */
+    border: 1px solid #555; /* Border color */
+    background-color: #3b4048; /* Darker background for the dropdown */
+    color: #abb2bf; /* Text color (common in dark themes) */
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px; /* More space below the dropdown */
+    appearance: none; /* Remove default system dropdown styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23abb2bf" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom arrow icon */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+.algorithm-dropdown:focus {
+    outline: none;
+    border-color: #61afef; /* Highlight color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(97, 175, 239, 0.25); /* Subtle focus shadow */
+}
+
+.algorithm-dropdown option {
+    background-color: #3b4048; /* Background for dropdown options */
+    color: #abb2bf; /* Text color for options */
+}
+
+.pseudocode-block {
+    margin-top: 15px;
+    padding: 0; /* Remove padding here, let the code block handle it */
+    background-color: transparent; /* No background needed here, code block has its own */
+    border-radius: 8px;
+    overflow-x: auto; /* Add scroll if code is too wide */
+    position: relative; /* Needed for potential absolute positioning of copy buttons etc. */
+}
+
+/* Style for the initial message */
+.pseudocode-block p {
+    color: #bbb; /* Slightly muted text */
+    font-style: italic;
+    text-align: center;
+    padding: 20px; /* Add padding to the message */
+}
+
+/* Styling for the actual code block within the display area */
+.pseudocode-block pre {
+    margin: 0; /* Remove default pre margin */
+    padding: 15px; /* Add padding inside the code block */
+    border-radius: 8px; /* Match container border-radius */
+    background-color: #1e1e1e; /* Dark background for the code area */
+    color: #abb2bf; /* Default code text color */
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace; /* Monospaced font for code */
+    font-size: 0.9em; /* Slightly smaller font size */
+    line-height: 1.5;
+    tab-size: 4;
+    white-space: pre-wrap; /* Wrap long lines */
+    word-wrap: break-word;
+}
+
+/* Pygments/Syntax Highlighting styles */
+/* These styles are often provided by your MkDocs theme and Pygments.
+   The colors below are examples that might resemble a VS Code dark theme.
+   You might need to adjust these or rely on your theme's built-in styles.
+   If the highlighting isn't working or the colors are wrong, check your
+   mkdocs.yml theme configuration for Pygments.
+*/
+.pseudocode-block code .k { color: #c678dd; } /* Keyword */
+.pseudocode-block code .nf { color: #61afef; } /* Function name */
+.pseudocode-block code .nc { color: #e5c07b; } /* Class name */
+.pseudocode-block code .s { color: #98c379; } /* String */
+.pseudocode-block code .c1 { color: #5c6370; font-style: italic; } /* Comment */
+.pseudocode-block code .o { color: #56b6c2; } /* Operator */
+.pseudocode-block code .mi { color: #d19a66; } /* Integer */
+.pseudocode-block code .mf { color: #d19a66; } /* Float */
+.pseudocode-block code .bp { color: #e5c07b; } /* Built-in pseudo */
+.pseudocode-block code .nv { color: #abb2bf; } /* Variable name */
+/* Add more Pygments classes as needed based on inspection */
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

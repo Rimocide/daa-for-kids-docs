@@ -1,0 +1,868 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../knapsack/">
+      
+      
+        <link rel="next" href="../huffman/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Longest Common Subsequence - DAA for Kids</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#longest-common-subsequence-lcs-visualizer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="DAA for Kids" class="md-header__button md-logo" aria-label="DAA for Kids" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DAA for Kids
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Longest Common Subsequence
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DAA for Kids" class="md-nav__button md-logo" aria-label="DAA for Kids" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    DAA for Kids
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Components
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Components
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pathfinding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pathfinding Algorithms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../knapsack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Knapsack Problem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Longest Common Subsequence
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Longest Common Subsequence
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-longest-common-subsequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the Longest Common Subsequence
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploring-the-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploring the Visualizer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithm-pseudocode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm Pseudocode
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../huffman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Huffman Encoding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-longest-common-subsequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the Longest Common Subsequence
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploring-the-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploring the Visualizer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithm-pseudocode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm Pseudocode
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="longest-common-subsequence-lcs-visualizer">Longest Common Subsequence (LCS) Visualizer</h1>
+<p>Welcome to the <strong>Longest Common Subsequence (LCS) Visualizer</strong> module. This tool provides an interactive way to understand a fundamental problem in computer science and bioinformatics: finding the longest subsequence common to two sequences. While the concept might sound simple, the efficient solution often involves dynamic programming, which this visualizer helps illuminate.</p>
+<hr />
+<h2 id="understanding-the-longest-common-subsequence">Understanding the Longest Common Subsequence</h2>
+<p>A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements. For example, "ACE" is a subsequence of "ABCDE". The Longest Common Subsequence (LCS) of two sequences is the longest subsequence that is present in both sequences. Unlike substrings, the common characters in an LCS do not need to be consecutive in the original sequences.</p>
+<p>The LCS problem has numerous applications, such as in file comparison utilities (like <code>diff</code>), bioinformatics for comparing DNA or protein sequences, and data compression.</p>
+<hr />
+<h2 id="exploring-the-visualizer">Exploring the Visualizer</h2>
+<p>The LCS Visualizer is designed to make the dynamic programming approach to solving the 0/1 Knapsack Problem transparent and interactive. The main interface, as seen in the <strong>Visualization</strong> tab, centers around the <strong>DP Table Visualization</strong>.</p>
+<ul>
+<li><strong>DP Table Visualization:</strong> This is the core of the visualizer. It displays the dynamic programming table used to compute the length of the LCS and reconstruct the subsequence itself. Each cell in the table represents the length of the LCS for prefixes of the two input strings.</li>
+<li><strong>Interactive Steps:</strong> The visualizer allows you to <strong>manually traverse the steps</strong> involved in filling the DP table. You can see how each cell's value is calculated based on the values of previous cells and whether the corresponding characters in the input strings match. This step-by-step process is crucial for understanding the dynamic programming recurrence relation.</li>
+<li><strong>Traceback:</strong> Once the DP table is filled, the visualizer can often show the traceback path through the table that reveals the actual Longest Common Subsequence.</li>
+</ul>
+<p>Beyond the main visualization, the page features additional tabs to deepen your understanding:</p>
+<ul>
+<li><strong>Algorithm Tab:</strong> This section provides a clear and intuitive explanation of the LCS algorithm through text, breaking down the logic and concepts without relying solely on the visualization.</li>
+<li><strong>Applications Tab:</strong> This tab details the various <strong>use cases and real-world applications</strong> of the Longest Common Subsequence problem across different fields, highlighting its practical importance.</li>
+</ul>
+<hr />
+<h2 id="algorithm-pseudocode">Algorithm Pseudocode</h2>
+<p>Understand the computational steps behind the Dynamic Programming approach to the LCS problem by reviewing its pseudocode.</p>
+<div class="algorithm-pseudocode-container">
+    <select id="lcs-algorithm-selector" class="algorithm-dropdown">
+        <option value="">Select an Algorithm</option>
+        <option value="dynamic-programming">Dynamic Programming (LCS)</option>
+    </select>
+
+    <div id="lcs-pseudocode-display" class="pseudocode-block">
+        <p>Select an algorithm from the dropdown above to see its pseudocode.</p>
+    </div>
+
+    <div id="dynamic-programming-pseudocode" class="pseudocode-content" style="display: none;">
+        <div class="highlight"><pre><span></span><code><span class="n">LCS_Length</span><span class="p">(</span><span class="n">string_A</span><span class="p">,</span> <span class="n">string_B</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">length</span> <span class="n">of</span> <span class="n">string_A</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">length</span> <span class="n">of</span> <span class="n">string_B</span>
+
+    <span class="o">//</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">DP</span> <span class="n">table</span> <span class="n">dp</span> <span class="n">of</span> <span class="n">size</span> <span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">x</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">//</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="n">will</span> <span class="n">store</span> <span class="n">the</span> <span class="n">length</span> <span class="n">of</span> <span class="n">LCS</span> <span class="n">of</span> <span class="n">string_A</span><span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">string_B</span><span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">create</span> <span class="n">a</span> <span class="n">table</span> <span class="n">dp</span> <span class="n">of</span> <span class="n">size</span> <span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">x</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="o">//</span> <span class="n">Fill</span> <span class="n">dp</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">bottom</span><span class="o">-</span><span class="n">up</span> <span class="n">manner</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">m</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="n">string_A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">string_B</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="o">//</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span> <span class="n">contains</span> <span class="n">the</span> <span class="n">length</span> <span class="n">of</span> <span class="n">the</span> <span class="n">LCS</span> <span class="k">for</span> <span class="n">string_A</span> <span class="ow">and</span> <span class="n">string_B</span>
+    <span class="n">lcs_length</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
+
+    <span class="o">//</span> <span class="n">Optional</span><span class="p">:</span> <span class="n">Reconstruct</span> <span class="n">the</span> <span class="n">LCS</span> <span class="n">string</span>
+    <span class="n">lcs_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">m</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">n</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">string_A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">string_B</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">lcs_string</span> <span class="o">=</span> <span class="n">string_A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">lcs_string</span> <span class="o">//</span> <span class="n">Prepend</span> <span class="n">character</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">lcs_length</span><span class="p">,</span> <span class="n">lcs_string</span>
+</code></pre></div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selector = document.getElementById('lcs-algorithm-selector'); // Unique ID for this selector
+    const pseudocodeDisplay = document.getElementById('lcs-pseudocode-display'); // Unique ID for this display area
+    // Selects hidden divs immediately following the display area with the specific class
+    const pseudocodeContentBlocks = document.querySelectorAll('#lcs-pseudocode-display + .pseudocode-content');
+
+    console.log("LCS Script loaded. Pseudocode content blocks found:", pseudocodeContentBlocks.length);
+
+    selector.addEventListener('change', function() {
+        const selectedAlgorithm = selector.value;
+        console.log('Selected LCS algorithm:', selectedAlgorithm);
+
+        // Hide all pseudocode blocks
+        pseudocodeContentBlocks.forEach(block => {
+            block.style.display = 'none';
+        });
+
+        // Clear the main display area
+        pseudocodeDisplay.innerHTML = '';
+
+        if (selectedAlgorithm) {
+            const targetBlockId = selectedAlgorithm + '-pseudocode';
+            console.log('Looking for target block with ID:', targetBlockId);
+            // Find the target block by ID within the same container or document
+            const targetBlock = document.getElementById(targetBlockId);
+
+            if (targetBlock) {
+                console.log('Target block FOUND:', targetBlock);
+                // Find the pre element directly in the hidden target block
+                const preElement = targetBlock.querySelector('pre');
+                console.log('Found pre element:', preElement);
+
+                if (preElement) {
+                     // Clone the pre element and append it to the display area
+                    const clonedPreElement = preElement.cloneNode(true);
+                    pseudocodeDisplay.appendChild(clonedPreElement);
+                    console.log('Pseudocode appended and should be visible.');
+
+                    // Re-highlight the code block if necessary.
+                    // MkDocs Material often handles this automatically for elements
+                    // added to the DOM, but if not, you might need to trigger it.
+                    // The exact method depends on the highlighting library used by MkDocs Material.
+                    // A common approach if using highlight.js would be:
+                    // if (window.hljs) {
+                    //     window.hljs.highlightBlock(clonedPreElement.querySelector('code'));
+                    // }
+                    // If using Prism.js:
+                    // if (window.Prism) {
+                    //     window.Prism.highlightElement(clonedPreElement.querySelector('code'));
+                    // }
+                    // Test this on your site to see if automatic re-highlighting works.
+                } else {
+                     console.error('Could not find pre element within target block:', targetBlock);
+                     pseudocodeDisplay.innerHTML = '<p>Error loading pseudocode.</p>';
+                }
+
+            } else {
+                console.error('Could not find target block with ID:', targetBlockId);
+                pseudocodeDisplay.innerHTML = '<p>Error loading pseudocode.</p>';
+            }
+        } else {
+             pseudocodeDisplay.innerHTML = '<p>Select an algorithm from the dropdown above to see its pseudocode.</p>';
+        }
+    });
+
+    // Optional: You might need to trigger highlighting on initial page load
+    // for all code blocks if they are not highlighted by default when hidden.
+    // This is often handled by MkDocs Material itself.
+});
+</script>
+
+<style>
+/* Reusing styles from the Pathfinding section for consistency */
+.algorithm-pseudocode-container {
+    margin: 20px 0; /* Add some vertical margin */
+    padding: 20px; /* Increased padding */
+    background-color: #282c34; /* A common dark theme background color (like VS Code's default) */
+    border-radius: 8px; /* Slightly more rounded corners */
+    border: 1px solid #3a3f4b; /* Subtle border color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    font-family: 'Roboto', sans-serif; /* Use a clean font, maybe match your theme's font */
+}
+
+.algorithm-dropdown {
+    display: block; /* Make it a block element for better layout */
+    width: 100%; /* Make it fill the container width */
+    padding: 12px 15px; /* Increased padding */
+    border-radius: 5px; /* Rounded corners for the dropdown */
+    border: 1px solid #555; /* Border color */
+    background-color: #3b4048; /* Darker background for the dropdown */
+    color: #abb2bf; /* Text color (common in dark themes) */
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px; /* More space below the dropdown */
+    appearance: none; /* Remove default system dropdown styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23abb2bf" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom arrow icon */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+.algorithm-dropdown:focus {
+    outline: none;
+    border-color: #61afef; /* Highlight color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(97, 175, 239, 0.25); /* Subtle focus shadow */
+}
+
+.algorithm-dropdown option {
+    background-color: #3b4048; /* Background for dropdown options */
+    color: #abb2bf; /* Text color for options */
+}
+
+.pseudocode-block {
+    margin-top: 15px;
+    padding: 0; /* Remove padding here, let the code block handle it */
+    background-color: transparent; /* No background needed here, code block has its own */
+    border-radius: 8px;
+    overflow-x: auto; /* Add scroll if code is too wide */
+    position: relative; /* Needed for potential absolute positioning of copy buttons etc. */
+}
+
+/* Style for the initial message */
+.pseudocode-block p {
+    color: #bbb; /* Slightly muted text */
+    font-style: italic;
+    text-align: center;
+    padding: 20px; /* Add padding to the message */
+}
+
+/* Styling for the actual code block within the display area */
+.pseudocode-block pre {
+    margin: 0; /* Remove default pre margin */
+    padding: 15px; /* Add padding inside the code block */
+    border-radius: 8px; /* Match container border-radius */
+    background-color: #1e1e1e; /* Dark background for the code area */
+    color: #abb2bf; /* Default code text color */
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace; /* Monospaced font for code */
+    font-size: 0.9em; /* Slightly smaller font size */
+    line-height: 1.5;
+    tab-size: 4;
+    white-space: pre-wrap; /* Wrap long lines */
+    word-wrap: break-word;
+}
+
+/* Pygments/Syntax Highlighting styles - Ensure these are consistent or rely on your theme */
+.pseudocode-block code .k { color: #c678dd; } /* Keyword */
+.pseudocode-block code .nf { color: #61afef; } /* Function name */
+.pseudocode-block code .nc { color: #e5c07b; } /* Class name */
+.pseudocode-block code .s { color: #98c379; } /* String */
+.pseudocode-block code .c1 { color: #5c6370; font-style: italic; } /* Comment */
+.pseudocode-block code .o { color: #56b6c2; } /* Operator */
+.pseudocode-block code .mi { color: #d19a66; } /* Integer */
+.pseudocode-block code .mf { color: #d19a66; } /* Float */
+.pseudocode-block code .bp { color: #e5c07b; } /* Built-in pseudo */
+.pseudocode-block code .nv { color: #abb2bf; } /* Variable name */
+/* Add more Pygments classes as needed based on inspection */
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
