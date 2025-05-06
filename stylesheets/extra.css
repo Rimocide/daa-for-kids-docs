@@ -1,14 +1,39 @@
 :root {
-    /* Purple accent for interactive elements (tabs, links, etc.) */
-    --md-accent-fg-color: #65349c;
-    --md-accent-fg-color--light: #7e55b8;
-    --md-accent-fg-color--dark: #4a267a;
-  
-    /* Override link color specifically */
-    --md-typeset-a-color: #65349c;
-  }
-  
+  /* Custom fuchsia/violet accent color */
+  --md-primary-fg-color: #d946ef;
+  --md-primary-fg-color--light: #e879f9;
+  --md-primary-fg-color--dark: #c026d3;
+  --md-accent-fg-color: #8b5cf6;
+  --md-typeset-a-color: #d946ef;  /* Link color in light mode */
+}
+
+/* Dark mode adjustments */
+[data-md-color-scheme="slate"] {
+  --md-typeset-a-color: #e879f9;  /* Link color in dark mode */
+}
+
   .md-typeset a:visited {
     color: #4a267a;
   }
-  
+  /* Keep header gradient */
+.md-header {
+  background: linear-gradient(to right, #d946ef, #8b5cf6);
+}
+
+.md-nav__link--active {
+  color: #d946ef;  /* Fuchsia color for active links */
+  font-weight: normal;
+  background: none;
+  border: none;
+}
+
+.md-nav__link:hover {
+  color: #d946ef;  /* Fuchsia color on hover */
+  background: none;
+  transform: none;
+}
+
+.md-nav__link {
+  color: #cf5de0;
+}
+
