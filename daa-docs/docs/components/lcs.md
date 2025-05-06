@@ -1,139 +1,100 @@
-# Knapsack Problem Visualizer
+# Longest Common Subsequence (LCS) Visualizer
 
-Welcome to the **Knapsack Problem Visualizer** module, where you can explore the classic **0/1 Knapsack Problem** through interactive visualizations. This module is designed to make understanding optimization problems and the power of dynamic programming both accessible and engaging.
-
----
-
-## Understanding the Knapsack Problem
-
-The 0/1 Knapsack Problem is a fundamental problem in combinatorial optimization. Imagine you have a knapsack with a maximum weight capacity and a set of items, each with a specific weight and value. The problem is to determine which items to include in the knapsack such that the total weight does not exceed the capacity, and the total value is maximized. The "0/1" signifies that you can either take an item entirely (1) or not take it at all (0) – you cannot take a fraction of an item.
-
-Our visualizer helps you grasp the core concepts and different approaches to solving this problem.
+Welcome to the **Longest Common Subsequence (LCS) Visualizer** module. This tool provides an interactive way to understand a fundamental problem in computer science and bioinformatics: finding the longest subsequence common to two sequences. While the concept might sound simple, the efficient solution often involves dynamic programming, which this visualizer helps illuminate.
 
 ---
 
-## Problem Setup
+## Understanding the Longest Common Subsequence
 
-The journey begins on the **Problem Setup** page. Here, you define the parameters of your specific Knapsack problem:
+A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements. For example, "ACE" is a subsequence of "ABCDE". The Longest Common Subsequence (LCS) of two sequences is the longest subsequence that is present in both sequences. Unlike substrings, the common characters in an LCS do not need to be consecutive in the original sequences.
 
-* **Bag Constraints:** Set the maximum weight capacity your knapsack can hold. You can also specify an empty bag weight if relevant to your scenario.
-* **Add New Item:** Define the items available to be potentially placed in the knapsack. For each item, you specify its name, weight, and monetary worth. You have the flexibility to add individual items or generate sets of items with varying characteristics (heavy, light, or mixed).
-
-This interactive setup allows you to create custom problem instances to test different scenarios and see how algorithms perform.
+The LCS problem has numerous applications, such as in file comparison utilities (like `diff`), bioinformatics for comparing DNA or protein sequences, and data compression.
 
 ---
 
-## Solving the Problem
+## Exploring the Visualizer
 
-Once your problem is defined, you move to the **Solve Problem** section. Here, you choose the algorithm you want to use to find the optimal solution. While the visualizer may offer multiple approaches, the **Dynamic Programming** method is a central focus.
+The LCS Visualizer is designed to make the dynamic programming approach to solving the 0/1 Knapsack Problem transparent and interactive. The main interface, as seen in the **Visualization** tab, centers around the **DP Table Visualization**.
 
-The dynamic programming approach to the Knapsack Problem is particularly insightful. It builds a solution iteratively by considering smaller subproblems. The visualizer beautifully showcases this process by constructing the **Dynamic Programming Table**. This table systematically records the maximum value that can be obtained for different capacities and subsets of items. The visualizer allows you to **manually traverse the steps** of filling this table, providing a clear, step-by-step understanding of how the optimal solution is derived from the solutions to subproblems. This interactive exploration of the DP table is key to demystifying this powerful technique.
+* **DP Table Visualization:** This is the core of the visualizer. It displays the dynamic programming table used to compute the length of the LCS and reconstruct the subsequence itself. Each cell in the table represents the length of the LCS for prefixes of the two input strings.
+* **Interactive Steps:** The visualizer allows you to **manually traverse the steps** involved in filling the DP table. You can see how each cell's value is calculated based on the values of previous cells and whether the corresponding characters in the input strings match. This step-by-step process is crucial for understanding the dynamic programming recurrence relation.
+* **Traceback:** Once the DP table is filled, the visualizer can often show the traceback path through the table that reveals the actual Longest Common Subsequence.
 
----
+Beyond the main visualization, the page features additional tabs to deepen your understanding:
 
-## Viewing Results and Comparison
-
-The **View Results** page presents the outcome of the chosen algorithm. You can see which items were selected for the knapsack, the total weight, and the total value achieved.
-
-A valuable feature of this module is the ability to **Compare Both Algorithms** (typically Dynamic Programming and the Greedy approach). The visualizer will run both algorithms on your defined problem instance and present their respective results side-by-side.
-
-Furthermore, an integrated **AI Assistant** is available throughout the module. On the comparison page, the AI Assistant provides insights into the performance of each algorithm for your specific problem instance, often highlighting why one might have performed better than the other, especially in cases where the Greedy approach fails to find the globally optimal solution that Dynamic Programming guarantees. This feature adds an extra layer of guidance and explanation to enhance your learning.
+* **Algorithm Tab:** This section provides a clear and intuitive explanation of the LCS algorithm through text, breaking down the logic and concepts without relying solely on the visualization.
+* **Applications Tab:** This tab details the various **use cases and real-world applications** of the Longest Common Subsequence problem across different fields, highlighting its practical importance.
 
 ---
 
 ## Algorithm Pseudocode
 
-Explore the fundamental logic behind the Greedy and Dynamic Programming approaches to the Knapsack Problem. Select an algorithm from the dropdown below to view its pseudocode.
+Understand the computational steps behind the Dynamic Programming approach to the LCS problem by reviewing its pseudocode.
 
 <div class="algorithm-pseudocode-container">
-    <select id="knapsack-algorithm-selector" class="algorithm-dropdown">
+    <select id="lcs-algorithm-selector" class="algorithm-dropdown">
         <option value="">Select an Algorithm</option>
-        <option value="greedy">Greedy Approach</option>
-        <option value="dynamic-programming">Dynamic Programming (0/1 Knapsack)</option>
+        <option value="dynamic-programming">Dynamic Programming (LCS)</option>
     </select>
 
-    <div id="knapsack-pseudocode-display" class="pseudocode-block">
+    <div id="lcs-pseudocode-display" class="pseudocode-block">
         <p>Select an algorithm from the dropdown above to see its pseudocode.</p>
-    </div>
-
-    <div id="greedy-pseudocode" class="pseudocode-content" style="display: none;">
-        ```python
-        Greedy_Knapsack(items, capacity):
-            // items is a list of (value, weight) tuples
-            // capacity is the maximum weight the knapsack can hold
-
-            sort items by value-to-weight ratio in descending order
-
-            current_weight = 0
-            total_value = 0
-            knapsack_items = []
-
-            for each item (value, weight) in sorted items:
-                if current_weight + weight <= capacity:
-                    knapsack_items.add(item)
-                    current_weight = current_weight + weight
-                    total_value = total_value + value
-                // In 0/1 Knapsack, we cannot take a fraction, so we skip if it doesn't fit
-
-            return total_value, knapsack_items
-        ```
     </div>
 
     <div id="dynamic-programming-pseudocode" class="pseudocode-content" style="display: none;">
         ```python
-        Dynamic_Programming_Knapsack(items, capacity):
-            // items is a list of (value, weight) tuples
-            // capacity is the maximum weight the knapsack can hold
-            // n is the number of items
+        LCS_Length(string_A, string_B):
+            m = length of string_A
+            n = length of string_B
 
-            n = number of items
-            create a DP table K of size (n+1) x (capacity+1)
+            // Create a DP table dp of size (m+1) x (n+1)
+            // dp[i][j] will store the length of LCS of string_A[0..i-1] and string_B[0..j-1]
+            create a table dp of size (m+1) x (n+1)
 
-            // Build the DP table K[][]
-            for i from 0 to n:
-                for w from 0 to capacity:
-                    if i == 0 or w == 0:
-                        K[i][w] = 0
-                    else if items[i-1].weight <= w:
-                        // Max of including item i or excluding item i
-                        K[i][w] = max(items[i-1].value + K[i-1][w - items[i-1].weight], K[i-1][w])
+            // Fill dp table in bottom-up manner
+            for i from 0 to m:
+                for j from 0 to n:
+                    if i == 0 or j == 0:
+                        dp[i][j] = 0
+                    else if string_A[i-1] == string_B[j-1]:
+                        dp[i][j] = dp[i-1][j-1] + 1
                     else:
-                        // Item i cannot be included
-                        K[i][w] = K[i-1][w]
+                        dp[i][j] = max(dp[i-1][j], dp[i][j-1])
 
-            // The maximum value is in K[n][capacity]
-            max_value = K[n][capacity]
+            // dp[m][n] contains the length of the LCS for string_A and string_B
+            lcs_length = dp[m][n]
 
-            // Reconstruct the items included (optional, but useful)
-            included_items = []
-            w = capacity
-            for i from n down to 1:
-                if max_value <= 0:
-                    break // Knapsack is full or no more value to add
+            // Optional: Reconstruct the LCS string
+            lcs_string = ""
+            i = m
+            j = n
+            while i > 0 and j > 0:
+                if string_A[i-1] == string_B[j-1]:
+                    lcs_string = string_A[i-1] + lcs_string // Prepend character
+                    i = i - 1
+                    j = j - 1
+                elif dp[i-1][j] > dp[i][j-1]:
+                    i = i - 1
+                else:
+                    j = j - 1
 
-                // If the current value is NOT the same as the value excluding item i,
-                // then item i must have been included.
-                if max_value != K[i-1][w]:
-                    included_items.add(items[i-1])
-                    max_value = max_value - items[i-1].value
-                    w = w - items[i-1].weight
-
-            return K[n][capacity], included_items
+            return lcs_length, lcs_string
         ```
     </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const selector = document.getElementById('knapsack-algorithm-selector'); // Unique ID for this selector
-    const pseudocodeDisplay = document.getElementById('knapsack-pseudocode-display'); // Unique ID for this display area
-    const pseudocodeContentBlocks = document.querySelectorAll('#knapsack-pseudocode-display + .pseudocode-content'); // Selects hidden divs immediately following the display area
+    const selector = document.getElementById('lcs-algorithm-selector'); // Unique ID for this selector
+    const pseudocodeDisplay = document.getElementById('lcs-pseudocode-display'); // Unique ID for this display area
+    // Selects hidden divs immediately following the display area with the specific class
+    const pseudocodeContentBlocks = document.querySelectorAll('#lcs-pseudocode-display + .pseudocode-content');
 
-    console.log("Knapsack Script loaded. Pseudocode content blocks found:", pseudocodeContentBlocks.length);
+    console.log("LCS Script loaded. Pseudocode content blocks found:", pseudocodeContentBlocks.length);
 
     selector.addEventListener('change', function() {
         const selectedAlgorithm = selector.value;
-        console.log('Selected Knapsack algorithm:', selectedAlgorithm);
+        console.log('Selected LCS algorithm:', selectedAlgorithm);
 
         // Hide all pseudocode blocks
         pseudocodeContentBlocks.forEach(block => {
@@ -148,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Looking for target block with ID:', targetBlockId);
             // Find the target block by ID within the same container or document
             const targetBlock = document.getElementById(targetBlockId);
-
 
             if (targetBlock) {
                 console.log('Target block FOUND:', targetBlock);
@@ -284,7 +244,3 @@ document.addEventListener('DOMContentLoaded', function() {
 /* Add more Pygments classes as needed based on inspection */
 
 </style>
----
-
-By utilizing the Knapsack Problem Visualizer, you can gain a deep, intuitive understanding of this classic optimization challenge, appreciate the elegance of dynamic programming, and see the practical differences between different algorithmic strategies.
-

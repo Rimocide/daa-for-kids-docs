@@ -22,7 +22,6 @@ nav:
     - Longest Common Subsequence: components/lcs.md
     - Huffman Encoding: components/huffman.md
   - Usage: usage.md
-  - Examples: examples.md
   - Contributing: contributing.md
   - Changelog: changelog.md
 markdown_extensions:
