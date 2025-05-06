@@ -16,8 +16,8 @@ Our visualizer helps you grasp the core concepts and different approaches to sol
 
 The journey begins on the **Problem Setup** page. Here, you define the parameters of your specific Knapsack problem:
 
-* **Bag Constraints:** Set the maximum weight capacity your knapsack can hold. You can also specify an empty bag weight if relevant to your scenario.
-* **Add New Item:** Define the items available to be potentially placed in the knapsack. For each item, you specify its name, weight, and monetary worth. You have the flexibility to add individual items or generate sets of items with varying characteristics (heavy, light, or mixed).
+- **Bag Constraints:** Set the maximum weight capacity your knapsack can hold. You can also specify an empty bag weight if relevant to your scenario.
+- **Add New Item:** Define the items available to be potentially placed in the knapsack. For each item, you specify its name, weight, and monetary worth. You have the flexibility to add individual items or generate sets of items with varying characteristics (heavy, light, or mixed).
 
 This interactive setup allows you to create custom problem instances to test different scenarios and see how algorithms perform.
 
@@ -121,6 +121,7 @@ Explore the fundamental logic behind the Greedy and Dynamic Programming approach
             return K[n][capacity], included_items
         ```
     </div>
+
 </div>
 
 <script>
@@ -215,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
     border: 1px solid #555; /* Border color */
     background-color: #3b4048; /* Darker background for the dropdown */
     color: #abb2bf; /* Text color (common in dark themes) */
-    font-size: 1rem;
+    font-size: 0.7rem;
     cursor: pointer;
     margin-bottom: 20px; /* More space below the dropdown */
     appearance: none; /* Remove default system dropdown styling */
@@ -223,15 +224,15 @@ document.addEventListener('DOMContentLoaded', function() {
     -moz-appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg fill="%23abb2bf" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom arrow icon */
     background-repeat: no-repeat;
-    background-position: right 10px center;
+    background-position: right 10px center;    
     background-size: 12px;
 }
 
 .algorithm-dropdown:focus {
     outline: none;
-    border-color: #61afef; /* Highlight color on focus */
-    box-shadow: 0 0 0 0.2rem rgba(97, 175, 239, 0.25); /* Subtle focus shadow */
-}
+    border-color:rgb(207, 93, 224); /* Highlight color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(214, 138, 226, 0.25); /* Subtle focus shadow */
+} 
 
 .algorithm-dropdown option {
     background-color: #3b4048; /* Background for dropdown options */
@@ -284,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
 /* Add more Pygments classes as needed based on inspection */
 
 </style>
+
 ---
 
 By utilizing the Knapsack Problem Visualizer, you can gain a deep, intuitive understanding of this classic optimization challenge, appreciate the elegance of dynamic programming, and see the practical differences between different algorithmic strategies.
-

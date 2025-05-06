@@ -14,13 +14,13 @@ At its heart, pathfinding is about navigating from a starting point to a destina
 
 The visualizer provides a dynamic grid environment where you can:
 
-* **Define the Environment:** Place start and end nodes, draw walls to represent impassable obstacles, and add weights to cells to simulate varying traversal costs.
+- **Define the Environment:** Place start and end nodes, draw walls to represent impassable obstacles, and add weights to cells to simulate varying traversal costs.
 
-* **Select an Algorithm:** Choose from a diverse set of pathfinding algorithms.
+- **Select an Algorithm:** Choose from a diverse set of pathfinding algorithms.
 
-* **Control Execution:** Start, pause, resume, and adjust the speed of the visualization to observe the algorithm's step-by-step process.
+- **Control Execution:** Start, pause, resume, and adjust the speed of the visualization to observe the algorithm's step-by-step process.
 
-* **Reset and Generate:** Clear the grid or generate random maps to test algorithms under different conditions.
+- **Reset and Generate:** Clear the grid or generate random maps to test algorithms under different conditions.
 
 As the algorithm runs, you'll see nodes being visited, the path being constructed (if found), and understand the search pattern unique to each algorithm.
 
@@ -34,33 +34,31 @@ This visualizer offers a comprehensive look at a variety of pathfinding algorith
 
 These algorithms are typically used on graphs where the cost of moving between any two connected nodes is the same (or assumed to be 1). They focus on finding the path with the fewest steps.
 
-* **Breadth-First Search (BFS):** Explores the graph level by level, guaranteeing the shortest path in terms of the number of edges.
+- **Breadth-First Search (BFS):** Explores the graph level by level, guaranteeing the shortest path in terms of the number of edges.
 
-* **Depth-First Search (DFS):** Explores as far down one branch as possible before backtracking, often used for traversal but not guaranteed to find the shortest path.
+- **Depth-First Search (DFS):** Explores as far down one branch as possible before backtracking, often used for traversal but not guaranteed to find the shortest path.
 
 ### Weighted Graph Algorithms
 
 When edges or nodes have different associated costs (weights), these algorithms are necessary to find the path with the minimum total cost.
 
-* **Dijkstra’s Algorithm:** Finds the shortest paths from a single source node to all other nodes in a graph with non-negative edge weights.
+- **Dijkstra’s Algorithm:** Finds the shortest paths from a single source node to all other nodes in a graph with non-negative edge weights.
 
-* **A\* Search Algorithm:** An extension of Dijkstra's that uses a heuristic function to guide its search, making it more efficient in many cases, especially for finding a path to a specific destination.
+- **A\* Search Algorithm:** An extension of Dijkstra's that uses a heuristic function to guide its search, making it more efficient in many cases, especially for finding a path to a specific destination.
 
-* **Greedy Best-First Search:** Uses a heuristic to prioritize exploration towards the target, but does not guarantee the shortest path.
+- **Greedy Best-First Search:** Uses a heuristic to prioritize exploration towards the target, but does not guarantee the shortest path.
 
-* **Bellman-Ford Algorithm:** Can find the shortest paths from a single source node even in graphs with negative edge weights (though it detects negative cycles).
+- **Bellman-Ford Algorithm:** Can find the shortest paths from a single source node even in graphs with negative edge weights (though it detects negative cycles).
 
-* **Floyd-Warshall Algorithm:** Finds the shortest paths between *all* pairs of nodes in a weighted graph.
+- **Floyd-Warshall Algorithm:** Finds the shortest paths between _all_ pairs of nodes in a weighted graph.
 
 ### Advanced and Specialized Algorithms
 
 This category includes algorithms designed for specific scenarios or offering alternative approaches to pathfinding.
 
-* **Bidirectional Search:** Runs two searches simultaneously, one from the start and one from the end, meeting in the middle. Can be faster than a single-direction search.
+- **Bidirectional Search:** Runs two searches simultaneously, one from the start and one from the end, meeting in the middle. Can be faster than a single-direction search.
 
-* **Jump Point Search:** An optimization for grid-based pathfinding that "jumps" over large areas, significantly speeding up search on uniform cost grids.
-
-
+- **Jump Point Search:** An optimization for grid-based pathfinding that "jumps" over large areas, significantly speeding up search on uniform cost grids.
 
 ---
 
@@ -538,7 +536,7 @@ document.addEventListener('DOMContentLoaded', function() {
     border: 1px solid #555; /* Border color */
     background-color: #3b4048; /* Darker background for the dropdown */
     color: #abb2bf; /* Text color (common in dark themes) */
-    font-size: 1rem;
+    font-size: 0.7rem;
     cursor: pointer;
     margin-bottom: 20px; /* More space below the dropdown */
     appearance: none; /* Remove default system dropdown styling */
@@ -552,8 +550,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .algorithm-dropdown:focus {
     outline: none;
-    border-color: #61afef; /* Highlight color on focus */
-    box-shadow: 0 0 0 0.2rem rgba(97, 175, 239, 0.25); /* Subtle focus shadow */
+    border-color:rgb(207, 93, 224); /* Highlight color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(214, 138, 226, 0.25); /* Subtle focus shadow */
 }
 
 .algorithm-dropdown option {

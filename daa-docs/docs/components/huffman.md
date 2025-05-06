@@ -20,9 +20,9 @@ The Huffman Encoding Visualizer allows you to input text and see the entire enco
 
 The **Visualization** tab is where you can see the fundamental components of the Huffman encoding process:
 
-* **Huffman Tree:** Witness the construction of the Huffman tree based on the character frequencies of your input text. The tree visually represents how character codes are derived.
-* **Character Frequencies:** View a table listing each unique character in your input text and its corresponding frequency count. This is the basis for building the Huffman tree.
-* **Huffman Codes:** See the generated variable-length binary code for each character. Observe how characters with higher frequencies have shorter codes.
+- **Huffman Tree:** Witness the construction of the Huffman tree based on the character frequencies of your input text. The tree visually represents how character codes are derived.
+- **Character Frequencies:** View a table listing each unique character in your input text and its corresponding frequency count. This is the basis for building the Huffman tree.
+- **Huffman Codes:** See the generated variable-length binary code for each character. Observe how characters with higher frequencies have shorter codes.
 
 You can input your own text or select from **Sample Texts** to quickly explore different scenarios and see how the tree and codes change. The visualizer also immediately shows the **Original size** (in bits), the **Compressed size** (in bits), and the **Space saved** as a percentage, demonstrating the effectiveness of the compression.
 
@@ -94,6 +94,7 @@ Understand the computational steps involved in constructing the Huffman Tree and
             return encoded_string, huffman_tree_root, character_codes
         ```
     </div>
+
 </div>
 
 <script>
@@ -188,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
     border: 1px solid #555; /* Border color */
     background-color: #3b4048; /* Darker background for the dropdown */
     color: #abb2bf; /* Text color (common in dark themes) */
-    font-size: 1rem;
+    font-size: 0.7rem;
     cursor: pointer;
     margin-bottom: 20px; /* More space below the dropdown */
     appearance: none; /* Remove default system dropdown styling */
@@ -202,12 +203,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .algorithm-dropdown:focus {
     outline: none;
-    border-color: #61afef; /* Highlight color on focus */
-    box-shadow: 0 0 0 0.2rem rgba(97, 175, 239, 0.25); /* Subtle focus shadow */
+    border-color:rgb(207, 93, 224); /* Highlight color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(214, 138, 226, 0.25); /* Subtle focus shadow */
 }
 
 .algorithm-dropdown option {
     background-color: #3b4048; /* Background for dropdown options */
+    color: #abb2bf; /* Text color for options */
+}
+
+.algorithm-dropdown option:hover {
+    background-color: rgb(207, 93, 224); /* Background for dropdown options */
     color: #abb2bf; /* Text color for options */
 }
 

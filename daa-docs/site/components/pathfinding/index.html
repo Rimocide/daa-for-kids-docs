@@ -918,7 +918,7 @@
         <span class="k">if</span> <span class="n">distance</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">distance</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
             <span class="k">return</span> <span class="s2">&quot;Graph contains a negative cycle&quot;</span> <span class="o">//</span> <span class="n">Cannot</span> <span class="n">find</span> <span class="n">shortest</span> <span class="n">paths</span>
 
-    <span class="k">return</span> <span class="n">distance</span><span class="p">,</span> <span class="n">parent</span> <span class="o">//</span> <span class="n">Returns</span> <span class="n">shortest</span> <span class="n">distances</span> <span class="kn">from</span> <span class="nn">start_node</span> <span class="ow">and</span> <span class="n">parent</span> <span class="n">pointers</span>
+    <span class="k">return</span> <span class="n">distance</span><span class="p">,</span> <span class="n">parent</span> <span class="o">//</span> <span class="n">Returns</span> <span class="n">shortest</span> <span class="n">distances</span> <span class="kn">from</span><span class="w"> </span><span class="nn">start_node</span> <span class="ow">and</span> <span class="n">parent</span> <span class="n">pointers</span>
 
 <span class="o">//</span> <span class="n">Note</span><span class="p">:</span> <span class="n">To</span> <span class="n">find</span> <span class="n">the</span> <span class="n">path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">end_node</span><span class="p">,</span> <span class="n">you</span> <span class="n">would</span> <span class="n">reconstruct</span> <span class="n">it</span>
 <span class="o">//</span> <span class="n">using</span> <span class="n">the</span> <span class="n">parent</span> <span class="nb">map</span> <span class="n">after</span> <span class="n">the</span> <span class="n">algorithm</span> <span class="n">completes</span> <span class="ow">and</span> <span class="n">confirms</span> <span class="n">no</span> <span class="n">negative</span> <span class="n">cycles</span><span class="o">.</span>
@@ -1001,7 +1001,7 @@
     <span class="n">parent_backward</span><span class="p">[</span><span class="n">end_node</span><span class="p">]</span> <span class="o">=</span> <span class="n">null</span>
 
     <span class="k">while</span> <span class="n">queue_forward</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span> <span class="ow">and</span> <span class="n">queue_backward</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span><span class="p">:</span>
-        <span class="o">//</span> <span class="n">Search</span> <span class="kn">from</span> <span class="nn">start</span>
+        <span class="o">//</span> <span class="n">Search</span> <span class="kn">from</span><span class="w"> </span><span class="nn">start</span>
         <span class="n">current_f</span> <span class="o">=</span> <span class="n">queue_forward</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">current_f</span> <span class="ow">in</span> <span class="n">visited_backward</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">reconstruct_bidirectional_path</span><span class="p">(</span><span class="n">parent_forward</span><span class="p">,</span> <span class="n">parent_backward</span><span class="p">,</span> <span class="n">current_f</span><span class="p">)</span>
@@ -1012,7 +1012,7 @@
                 <span class="n">parent_forward</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_f</span>
                 <span class="n">queue_forward</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
 
-        <span class="o">//</span> <span class="n">Search</span> <span class="kn">from</span> <span class="nn">end</span>
+        <span class="o">//</span> <span class="n">Search</span> <span class="kn">from</span><span class="w"> </span><span class="nn">end</span>
         <span class="n">current_b</span> <span class="o">=</span> <span class="n">queue_backward</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">current_b</span> <span class="ow">in</span> <span class="n">visited_forward</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">reconstruct_bidirectional_path</span><span class="p">(</span><span class="n">parent_forward</span><span class="p">,</span> <span class="n">parent_backward</span><span class="p">,</span> <span class="n">current_b</span><span class="p">)</span>
@@ -1027,15 +1027,15 @@
 
 <span class="n">reconstruct_bidirectional_path</span><span class="p">(</span><span class="n">parent_forward</span><span class="p">,</span> <span class="n">parent_backward</span><span class="p">,</span> <span class="n">meeting_node</span><span class="p">):</span>
     <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="o">//</span> <span class="n">Path</span> <span class="kn">from</span> <span class="nn">start</span> <span class="n">to</span> <span class="n">meeting_node</span>
+    <span class="o">//</span> <span class="n">Path</span> <span class="kn">from</span><span class="w"> </span><span class="nn">start</span> <span class="n">to</span> <span class="n">meeting_node</span>
     <span class="n">current</span> <span class="o">=</span> <span class="n">meeting_node</span>
     <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">null</span><span class="p">:</span>
         <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
         <span class="n">current</span> <span class="o">=</span> <span class="n">parent_forward</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
     <span class="n">reverse</span> <span class="n">path</span>
 
-    <span class="o">//</span> <span class="n">Path</span> <span class="kn">from</span> <span class="nn">meeting_node</span> <span class="n">to</span> <span class="n">end_node</span>
-    <span class="n">current</span> <span class="o">=</span> <span class="n">parent_backward</span><span class="p">[</span><span class="n">meeting_node</span><span class="p">]</span> <span class="o">//</span> <span class="n">Start</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">node</span> <span class="o">*</span><span class="n">before</span><span class="o">*</span> <span class="n">the</span> <span class="n">meeting</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">backward</span> <span class="n">search</span>
+    <span class="o">//</span> <span class="n">Path</span> <span class="kn">from</span><span class="w"> </span><span class="nn">meeting_node</span> <span class="n">to</span> <span class="n">end_node</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">parent_backward</span><span class="p">[</span><span class="n">meeting_node</span><span class="p">]</span> <span class="o">//</span> <span class="n">Start</span> <span class="kn">from</span><span class="w"> </span><span class="nn">the</span> <span class="n">node</span> <span class="o">*</span><span class="n">before</span><span class="o">*</span> <span class="n">the</span> <span class="n">meeting</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">backward</span> <span class="n">search</span>
     <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">null</span><span class="p">:</span>
         <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
         <span class="n">current</span> <span class="o">=</span> <span class="n">parent_backward</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
@@ -1062,7 +1062,7 @@
         <span class="k">if</span> <span class="n">current_node</span> <span class="ow">is</span> <span class="n">end_node</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">reconstruct_path</span><span class="p">(</span><span class="n">came_from</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
 
-        <span class="o">//</span> <span class="n">Find</span> <span class="s2">&quot;jump points&quot;</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">current</span> <span class="n">node</span>
+        <span class="o">//</span> <span class="n">Find</span> <span class="s2">&quot;jump points&quot;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">the</span> <span class="n">current</span> <span class="n">node</span>
         <span class="n">neighbors</span> <span class="o">=</span> <span class="n">find_jump_points</span><span class="p">(</span><span class="n">current_node</span><span class="p">,</span> <span class="n">came_from</span><span class="p">[</span><span class="n">current_node</span><span class="p">],</span> <span class="n">grid</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">each</span> <span class="n">neighbor</span> <span class="p">(</span><span class="n">jump_point</span><span class="p">):</span>
@@ -1081,7 +1081,7 @@
     <span class="o">//</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">core</span> <span class="nb">complex</span> <span class="n">part</span> <span class="n">of</span> <span class="n">JPS</span><span class="o">.</span>
     <span class="o">//</span> <span class="n">It</span> <span class="n">involves</span> <span class="n">pruning</span> <span class="n">redundant</span> <span class="n">neighbors</span> <span class="ow">and</span> <span class="n">recursively</span> <span class="n">searching</span> <span class="k">for</span> <span class="n">forced</span> <span class="n">neighbors</span>
     <span class="o">//</span> <span class="ow">and</span> <span class="n">jump</span> <span class="n">points</span> <span class="ow">in</span> <span class="n">cardinal</span> <span class="ow">and</span> <span class="n">diagonal</span> <span class="n">directions</span><span class="o">.</span>
-    <span class="o">//</span> <span class="n">Returns</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">significant</span> <span class="s2">&quot;jump points&quot;</span> <span class="n">reachable</span> <span class="kn">from</span> <span class="nn">current_node.</span>
+    <span class="o">//</span> <span class="n">Returns</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">significant</span> <span class="s2">&quot;jump points&quot;</span> <span class="n">reachable</span> <span class="kn">from</span><span class="w"> </span><span class="nn">current_node.</span>
     <span class="k">pass</span> <span class="o">//</span> <span class="n">Placeholder</span> <span class="k">for</span> <span class="nb">complex</span> <span class="n">logic</span>
 
 <span class="n">heuristic</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">):</span>

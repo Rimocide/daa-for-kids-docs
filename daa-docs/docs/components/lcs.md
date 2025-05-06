@@ -16,14 +16,14 @@ The LCS problem has numerous applications, such as in file comparison utilities 
 
 The LCS Visualizer is designed to make the dynamic programming approach to solving the 0/1 Knapsack Problem transparent and interactive. The main interface, as seen in the **Visualization** tab, centers around the **DP Table Visualization**.
 
-* **DP Table Visualization:** This is the core of the visualizer. It displays the dynamic programming table used to compute the length of the LCS and reconstruct the subsequence itself. Each cell in the table represents the length of the LCS for prefixes of the two input strings.
-* **Interactive Steps:** The visualizer allows you to **manually traverse the steps** involved in filling the DP table. You can see how each cell's value is calculated based on the values of previous cells and whether the corresponding characters in the input strings match. This step-by-step process is crucial for understanding the dynamic programming recurrence relation.
-* **Traceback:** Once the DP table is filled, the visualizer can often show the traceback path through the table that reveals the actual Longest Common Subsequence.
+- **DP Table Visualization:** This is the core of the visualizer. It displays the dynamic programming table used to compute the length of the LCS and reconstruct the subsequence itself. Each cell in the table represents the length of the LCS for prefixes of the two input strings.
+- **Interactive Steps:** The visualizer allows you to **manually traverse the steps** involved in filling the DP table. You can see how each cell's value is calculated based on the values of previous cells and whether the corresponding characters in the input strings match. This step-by-step process is crucial for understanding the dynamic programming recurrence relation.
+- **Traceback:** Once the DP table is filled, the visualizer can often show the traceback path through the table that reveals the actual Longest Common Subsequence.
 
 Beyond the main visualization, the page features additional tabs to deepen your understanding:
 
-* **Algorithm Tab:** This section provides a clear and intuitive explanation of the LCS algorithm through text, breaking down the logic and concepts without relying solely on the visualization.
-* **Applications Tab:** This tab details the various **use cases and real-world applications** of the Longest Common Subsequence problem across different fields, highlighting its practical importance.
+- **Algorithm Tab:** This section provides a clear and intuitive explanation of the LCS algorithm through text, breaking down the logic and concepts without relying solely on the visualization.
+- **Applications Tab:** This tab details the various **use cases and real-world applications** of the Longest Common Subsequence problem across different fields, highlighting its practical importance.
 
 ---
 
@@ -81,6 +81,7 @@ Understand the computational steps behind the Dynamic Programming approach to th
             return lcs_length, lcs_string
         ```
     </div>
+
 </div>
 
 <script>
@@ -175,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
     border: 1px solid #555; /* Border color */
     background-color: #3b4048; /* Darker background for the dropdown */
     color: #abb2bf; /* Text color (common in dark themes) */
-    font-size: 1rem;
+    font-size: 0.7rem;
     cursor: pointer;
     margin-bottom: 20px; /* More space below the dropdown */
     appearance: none; /* Remove default system dropdown styling */
@@ -189,8 +190,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .algorithm-dropdown:focus {
     outline: none;
-    border-color: #61afef; /* Highlight color on focus */
-    box-shadow: 0 0 0 0.2rem rgba(97, 175, 239, 0.25); /* Subtle focus shadow */
+    border-color:rgb(207, 93, 224); /* Highlight color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(214, 138, 226, 0.25); /* Subtle focus shadow */
 }
 
 .algorithm-dropdown option {
